@@ -1,0 +1,36 @@
+name: Java CI con Maven + Calidad
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clonar el repositorio
+      uses: actions/checkout@v3
+
+    - name: Configurar Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Construir el proyecto
+      run: mvn clean install
+
+    - name: Ejecutar pruebas unitarias
+      run: mvn test
+
+    - name: Ejecutar Checkstyle
+      run: mvn checkstyle:check
+
+    - name: Ejecutar PMD
+      run: mvn pmd:check
+
+    - name: Generar reporte de cobertura JaCoCo
+      run: mvn jacoco:report
