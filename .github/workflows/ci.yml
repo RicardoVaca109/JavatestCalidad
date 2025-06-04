@@ -52,7 +52,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Maven-Reports
-          path: |
+          path:
             mi-proyecto/target/site/jacoco/jacoco.xml
             mi-proyecto/target/checkstyle-result.xml
             mi-proyecto/target/pmd.xml
